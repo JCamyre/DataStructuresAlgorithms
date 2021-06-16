@@ -1,6 +1,6 @@
 class HashTable():  
     def __init__(self):
-        self.arr = []
+        self.arr = [None] * 20
     
     def append(self, key, val):
         key = hash(key)
@@ -12,7 +12,19 @@ class HashTable():
             cur_node = self.arr[i]
             while cur_node.next:
                 cur_node = cur_node.next
-            cur_node.next = node               
+            cur_node.next = node
+        else:
+            self.arr[i] = node
+            
+    def display(self):
+        for i in range(len(self.arr)):
+            if self.arr[i]:
+                cur_node = self.arr[i]
+                while cur_node.next:
+                    print(cur_node.val)
+                    cur_node = cur_node.next
+                print(cur_node.val)
+                               
         
 class SingleLinkedNode():
     def __init__(self, val=None):
@@ -20,7 +32,9 @@ class SingleLinkedNode():
         self.next = None
     
 # different hash value every time
-print(hash('joseph'))
+hashtable = HashTable()
+hashtable.append('name', 'joseph')
+hashtable.display()
         
 # 1.1: Most obvious would be to use hash table. How much more efficient is hash table than dictionary?
 # Just loop through string, map each letter to hash map/dictionary. If letter already in hashmap, return False.
