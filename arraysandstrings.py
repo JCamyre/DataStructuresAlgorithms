@@ -91,7 +91,7 @@ def is_unique_bruteforce(string):
 
 # 1.2 another hashmap, very obv. if hashmap[i]: hashmap[i] += 1; else: hashmap[i] = 1
 
-# 1.3. For Python, very obv (split(), replace()). 
+# 1.3. For Python, very obv (split(), replace()). All are O(N)
 def urlify(string):
     print('%20'.join(string.split()))
     print(string.replace(' ', '%20'))
@@ -102,3 +102,16 @@ def urlify(string):
         else:
             arr[i] = string[i]
     print(''.join(arr))
+    
+# 1.4 string[:n] == string[n:]. Only problem is if odd N length. Also have to consider white space. Could do hashtable and check to see how many of each character. There has to be a certain/matching number of even and odd frequency of characters. 
+# I can't think of the pattern rn...
+
+# 1.5 Brute force: Loop through both strings, if either not equal, a+=1. Have first if statement(a < 1) {return False}
+
+# 1.6 Loop through, Use hashtable. Brute force way of checking which is longer, make new string and compare which ever is longer. Better way: compare len(dict)*2 == original string.
+
+# 1.7 2d list, if at end of list, move down vertically, YO THIS ONE IS SUSSSY. If 
+
+# 1.8 Looping through the 2d list, if(x==0){arr[i]=[0]*length of array}, then loop through all arrays and set arr[i]=0 vertically.
+
+# 1.9 I'll think about this one
