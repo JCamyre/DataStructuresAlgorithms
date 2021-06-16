@@ -3,10 +3,10 @@ class HashTable():
         self.arr = [None] * 20
     
     def append(self, key, val):
-        key = hash(key)
-        i = key % len(self.arr)
-        # Could also use balanced binary tree
-        node = SingleLinkedNode(val={key: val})
+        hashed_key = hash(key)
+        i = hashed_key % len(self.arr)
+        # Could also use balanced binary tree. Should I store hashed_key or regular key?
+        node = SingleLinkedNode(val={hashed_key: val})
         # might have issue with this line, since we Python array are dynamically changing in size, there won't be any spaces available, which means there will never be an empty element
         # could do self.arr = [None] * 20
         if self.arr[i]:
@@ -27,16 +27,16 @@ class HashTable():
                 print(cur_node.val)
                 
     def find(self, key):
-        key = hash(key)
-        i = key % len(self.arr)
+        hashed_key = hash(key)
+        i = hashed_key % len(self.arr)
         if self.arr[i]:
             cur_node = self.arr[i]
             while cur_node.next:
-                if key in cur_node.val:
-                    print(cur_node.val)
+                if hashed_key in cur_node.val:
+                    print(key, cur_node.val[hashed_key])
                 cur_node = cur_node.next
-            if key in cur_node.val:
-                print(cur_node.val)
+            if hashed_key in cur_node.val:
+                print(key, cur_node.val[hashed_key])
             
                                
 # Kinda weird, but I think this is right: for the val, store {key: val}
