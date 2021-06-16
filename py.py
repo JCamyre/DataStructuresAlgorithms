@@ -89,4 +89,16 @@ def is_unique_bruteforce(string):
 
 # Best conceivable runtime (BCR) is O(N), since you have to loop through all elements atleast once.
 
+# 1.2 another hashmap, very obv. if hashmap[i]: hashmap[i] += 1; else: hashmap[i] = 1
 
+# 1.3. For Python, very obv (split(), replace()). 
+def urlify(string):
+    print('%20'.join(string.split()))
+    print(string.replace(' ', '%20'))
+    arr = []
+    for i in range(len(string)):
+        if string[i] == ' ':
+            arr[i] = '%20'
+        else:
+            arr[i] = string[i]
+    print(''.join(arr))
