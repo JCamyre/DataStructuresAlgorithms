@@ -57,8 +57,13 @@ def testing(dict):
         
     hashtable.display()
     
-testing('yo')
 
+    
+    
+    
+    
+    
+    
 # 1.1: Most obvious would be to use hash table. How much more efficient is hash table than dictionary?
 # Just loop through string, map each letter to hash map/dictionary. If letter already in hashmap, return False.
 def is_unique(string):
