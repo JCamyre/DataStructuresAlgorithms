@@ -5,12 +5,13 @@ class HashTable():
     def append(self, key, val):
         key = hash(key)
         i = key % len(self.arr)
-        node = SingleLinkedNode(val=val)
+        # Could also use balanced binary tree
+        node = SingleLinkedNode(val={key: val})
         # might have issue with this line, since we Python array are dynamically changing in size, there won't be any spaces available, which means there will never be an empty element
         # could do self.arr = [None] * 20
         if self.arr[i]:
             cur_node = self.arr[i]
-            while cur_node.next:
+            while cur_node.next: # traversing
                 cur_node = cur_node.next
             cur_node.next = node
         else:
@@ -24,8 +25,21 @@ class HashTable():
                     print(cur_node.val)
                     cur_node = cur_node.next
                 print(cur_node.val)
+                
+    def find(self, key):
+        key = hash(key)
+        i = key % len(self.arr)
+        if self.arr[i]:
+            cur_node = self.arr[i]
+            while cur_node.next:
+                if key in cur_node.val:
+                    print(cur_node.val)
+                cur_node = cur_node.next
+            if key in cur_node.val:
+                print(cur_node.val)
+            
                                
-        
+# Kinda weird, but I think this is right: for the val, store {key: val}
 class SingleLinkedNode():
     def __init__(self, val=None):
         self.val = val
@@ -33,9 +47,18 @@ class SingleLinkedNode():
     
 # different hash value every time
 hashtable = HashTable()
-hashtable.append('name', 'joseph')
-hashtable.display()
+def testing(dict):
+    # for key, val in dict.items():
+    for key, val in zip('abcdefghij', list(range(10))):
+        hashtable.append(key, val)
+    
+    for key in 'abcdefjghij':
+        hashtable.find(key)
         
+    hashtable.display()
+    
+testing('yo')
+
 # 1.1: Most obvious would be to use hash table. How much more efficient is hash table than dictionary?
 # Just loop through string, map each letter to hash map/dictionary. If letter already in hashmap, return False.
 def is_unique(string):
