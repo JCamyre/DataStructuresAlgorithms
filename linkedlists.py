@@ -159,3 +159,72 @@ while head.next:
     print(head)
     head = head.next
 print(head)
+
+# 2.6 Two pointers. Two ways: Constant space with the "runner technique". O(N) space if we use runner technique and a stack (where first in last out).
+def palindrome(head):
+    # p2 is twice as fast, once reaches end, p1 at mid point, then the second half and the first half (since p2 back at head). Better solution is to go in reverse.
+    # p1 = p2 = head
+    # while p2.next.next:
+    #     p1 = p1.next
+    #     p2 = p2.next.next
+        
+    # if p2.next:
+    #     p2 = p2.next
+    #     p1 = p1.next
+        
+    # # Reversing linkedlist so that we can compare both sides of palindrome easier
+    # cur_node = reverse(p1)
+    
+    # # Comparing both sides of palindrome by traversing through linkedlist
+    # original_head = head
+    # result = True
+    # # Maybe use better names...
+    # while cur_node.next != p1: # p1 midway point
+    #     if cur_node.val != original_head.val:
+    #         result = False
+    #         break
+        
+    #     original_head = original_head.next
+    #     cur_node = cur_node.next
+        
+    # # mid_node = reverse(cur_node)
+    
+    # return head
+    # if odd linkedlist length
+    
+    # Using O(N) space
+    stack = []
+    p1 = p2 = head
+    while p2.next.next:
+        p1 = p1.next
+        p2 = p2.next.next 
+    # First get values from p1 (mid point to the end)
+    # Then compare values from stack (using .pop()) and traversing through the first half of list
+    mid_node = p1
+    head_node = head 
+    while p1.next:
+        stack.append(p1.val)
+        p1 = p1.next
+    stack.append(p1.val)
+    
+    result = True
+    while head_node != mid_node:
+        if head_node.val != stack.pop().val:
+            result = False
+        head_node = head_node.next
+        
+    if head_node.val != stack.pop().val:
+        result = False
+        
+    return False
+        
+    
+    
+
+# reverses linkedlist and returns new head node
+def reverse(head): 
+    cur_node = head
+    while cur_node.next:
+        cur_node.next.next = cur_node
+        cur_node = cur_node.next    
+    return cur_node            
