@@ -227,4 +227,7 @@ def reverse(head):
     while cur_node.next:
         cur_node.next.next = cur_node
         cur_node = cur_node.next    
+
     return cur_node            
+
+
