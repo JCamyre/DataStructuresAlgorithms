@@ -163,71 +163,123 @@ print(head)
 # 2.6 Two pointers. Two ways: Constant space with the "runner technique". O(N) space if we use runner technique and a stack (where first in last out).
 def palindrome(head):
     # p2 is twice as fast, once reaches end, p1 at mid point, then the second half and the first half (since p2 back at head). Better solution is to go in reverse.
-    # p1 = p2 = head
-    # while p2.next.next:
-    #     p1 = p1.next
-    #     p2 = p2.next.next
+    def constant_space(head):
+        p1 = p2 = head
+        while p2.next.next:
+            p1 = p1.next
+            p2 = p2.next.next
+            
+        if p2.next:
+            p2 = p2.next
+            p1 = p1.next
+            
+        # Reversing linkedlist so that we can compare both sides of palindrome easier
+        cur_node = reverse(p1)
         
-    # if p2.next:
-    #     p2 = p2.next
-    #     p1 = p1.next
+        # Comparing both sides of palindrome by traversing through linkedlist
+        original_head = head
+        result = True
+        # Maybe use better names...
+        while cur_node.next != p1: # p1 midway point
+            if cur_node.val != original_head.val:
+                result = False
+                break
+            
+            original_head = original_head.next
+            cur_node = cur_node.next
+            
+        # mid_node = reverse(cur_node)
         
-    # # Reversing linkedlist so that we can compare both sides of palindrome easier
-    # cur_node = reverse(p1)
-    
-    # # Comparing both sides of palindrome by traversing through linkedlist
-    # original_head = head
-    # result = True
-    # # Maybe use better names...
-    # while cur_node.next != p1: # p1 midway point
-    #     if cur_node.val != original_head.val:
-    #         result = False
-    #         break
-        
-    #     original_head = original_head.next
-    #     cur_node = cur_node.next
-        
-    # # mid_node = reverse(cur_node)
-    
-    # return head
+        return head, result
     # if odd linkedlist length
     
     # Using O(N) space
-    stack = []
-    p1 = p2 = head
-    while p2.next.next:
-        p1 = p1.next
-        p2 = p2.next.next 
-    # First get values from p1 (mid point to the end)
-    # Then compare values from stack (using .pop()) and traversing through the first half of list
-    mid_node = p1
-    head_node = head 
-    while p1.next:
+    def linear_space(head):
+        stack = []
+        p1 = p2 = head
+        while p2.next.next:
+            p1 = p1.next
+            p2 = p2.next.next 
+        # First get values from p1 (mid point to the end)
+        # Then compare values from stack (using .pop()) and traversing through the first half of list
+        mid_node = p1
+        head_node = head 
+        while p1.next:
+            stack.append(p1.val)
+            p1 = p1.next
         stack.append(p1.val)
-        p1 = p1.next
-    stack.append(p1.val)
-    
-    result = True
-    while head_node != mid_node:
+        
+        result = True
+        while head_node != mid_node:
+            if head_node.val != stack.pop().val:
+                result = False
+            head_node = head_node.next
+            
         if head_node.val != stack.pop().val:
             result = False
-        head_node = head_node.next
-        
-    if head_node.val != stack.pop().val:
-        result = False
-        
-    return False
+            
+        return head, result
         
     
     
 
 # reverses linkedlist and returns new head node
-def reverse(head): 
+def reverse(head):
     cur_node = head
+    prev = None
     while cur_node.next:
-        cur_node.next.next = cur_node
-        cur_node = cur_node.next    
+        next = cur_node.next
+        cur_node.next = prev
+        prev = cur_node
+        cur_node = next
+    # This is example of special case, tail of linkedlist.
+    cur_node.next = prev
+    return cur_node  
 
-    return cur_node            
+# 2.7 Intersection: O(N^2) brute force way is to cmopare each element together. O(N) space is store values of first list as hashmap, traverse through second list, if node in hashmap[node.val]: return intersection
+# Still need to test. I'm assuming you can use a range of data structures.
+def intersection(head1, head2):
+    def brute_force(head1, head2): # O(N^2)
+        cur1 = head1
+        cur2 = head2
+        while cur1.next:
+            while cur2.next:
+                if cur1==cur2:
+                    return True
+                cur2 = cur2.next
+            cur1 = cur1.next
+    
+    def using_hashmap(head1, head2):
+        cur1 = head1
+        hashmap = {}
+        while cur1.next:
+            if cur1.val in hashmap:
+                hashmap[cur1.val].append(cur1)
+            else:
+                hashmap[cur1.val] = [cur1]
+        hashmap[cur1.val] = cur1
+            
+        cur2 = head2
+        # Shouldn't these if statements be constant? And if so, is this section of code j O(N)
+        while cur2.next:
+            if cur2.val in hashmap:
+                if cur2 in hashmap[cur2.val]:
+                    return intersection
 
+# 2.8 Same thing as using_hashmap for 2.7. Prob some other 
+def loop_detection(head):
+    # Kinda want to assume that each .val is unique, esp looking at example... but I won't.  
+    cur_node = head
+    hashmap = {}
+    while cur_node.next: 
+        if cur_node.val in cur_node:
+            if cur_node in hashmap[cur_node.val]:
+                return cur_node
+            hashmap[cur_node.val].append(cur_node)
+        else:
+            hashmap[cur_node.val] = [cur_node]
+    
+        
+    
+                       
 
