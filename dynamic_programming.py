@@ -83,9 +83,18 @@ def hanoi(N, tower1, tower2, tower3):
 # 8.7 What if duplicate letters in given string? Use the tries???? It is the best for words. 
 # Or could do loop through string starting with each letter, then for that function call pass in list of letters besides the one you are using, and repeat (the time complexity so baddd). Memoization??
 # O(N^N) time complexity bruhh cause N different permutations per character and N characters total. I feel iterative better than recursion here
+# Everytime algo ran, take of the letter you just used. 
 
-def permutations_wo_dups(string):
-    return 
+# def permutations_wo_dups(string: str):
+#     return permutations_wo_dups('', list(string))
+# memo, memo['yo'] = 'yo'? yomad = memo['yo'] + permutations_wo_dups('mad', 'yomad'). What if memo['yo'] = ['yo', 'oy'] (all permutations)
+# Convert total_string to list?
 
-def permutations_wo_dups(cur_string, total_string):
-    
+def permutations_wo_dups(cur_string: str, total_string: list):
+    print(total_string)
+    if len(total_string) == 0: # just if len(total_string): works. 
+        return cur_string
+    # Issue is that total_string.remove(char) affects total_string itself. How to return a list that has all accept removed element that doesn't affect original list?
+    return [permutations_wo_dups(cur_string + char, total_string.remove(char)) for char in total_string]
+
+print(permutations_wo_dups('', list('jose')))
