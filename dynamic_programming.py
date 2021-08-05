@@ -17,17 +17,15 @@ def cWays(n):
             return 0
         elif n == 0:
             return 1
-        
-        if not n in hashmap:
+        elif n in hashmap:
+            return hashmap[n]
+        else:
             # When entering a value to a hashmap, if another way(n) call has the same val in the hashmap, we won't have to waste computational power
             hashmap[n] = way(n-1, hashmap) + way(n-2, hashmap) + way(n-3, hashmap) # If you have this n value, all of its possible pathways is way() + way() + way()
-        else:
             return hashmap[n]
         
-        return 
-    
     return way(n, hashmap)
-
+print(cWays(4))
 # Robot in a grid
 # Check if square is off limit, check if at max x or y already, move(x+1, y) if doesn't work move(x, y+1), 
 def robotMove(grid: list[list]):
@@ -59,5 +57,35 @@ def magicIndex(arr):
 # 8.5: Recursive Multiply. Check for which digital is lower and iterate the range(smallest num)
 # Iteratively: for i in range(a): result += b. Recursive: add(n): return add(n+a) if n == 0
 
-# 8.6: 
+# 8.6: General rules: When popping, push to lowest tower, when you can pop, pop lowest to one tower, pop next to another, then pop lower to larger val
+# If there is a val on second/third tower (higher than the discs on third tower), push to that one. If there is 
+# Algo for putting a two stack on top of a third disc: Pop 3 -> push tower 1 -> Pop 3 -> push tower 2 -> pop 1 -> push tower 2 -> pop 1 -> push 3
+# Always push lowest value to other tower that is occupied
+# Keep popping and pushing until you can't, then pop and push on to the next tower, but it's important to always priotorize tower 3 (elif tower 3[0] > cur_disc: push 3). 
+# Always check if you can move ring from first tower (if tower1[0] < tower3[0] elif tower1[0] < tower2[0] elif tower2[0] < tower1[0] elif tower3[0] < tower1[0])
+def hanoi(N):
+    stacks = list(range(1, N+1)), [], []
+    return hanoi(N, stacks[0], stacks[1], stacks[2])        
 
+def hanoi(N, tower1, tower2, tower3):
+    if len(tower3) == N:
+        return 'Done!'
+    elif tower1[0] < tower3[0]:
+        tower3.push(tower1.pop())
+    elif tower1[0] < tower2[0]:
+        tower2.push(tower1.pop())
+    elif tower2[0] < tower1[0]:
+        tower1.push(tower2.pop())
+    elif tower3[0] < tower1[0]:
+        tower1.push(tower3.pop())
+    return hanoi(N, tower1, tower2, tower3)
+    
+# 8.7 What if duplicate letters in given string? Use the tries???? It is the best for words. 
+# Or could do loop through string starting with each letter, then for that function call pass in list of letters besides the one you are using, and repeat (the time complexity so baddd). Memoization??
+# O(N^N) time complexity bruhh cause N different permutations per character and N characters total. I feel iterative better than recursion here
+
+def permutations_wo_dups(string):
+    return 
+
+def permutations_wo_dups(cur_string, total_string):
+    
