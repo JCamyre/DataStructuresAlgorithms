@@ -7,7 +7,7 @@ def cWays(n):
         return 0
     return cWays(n-1) + cWays(n-2) + cWays(n-3)
 
-print(cWays(4))
+
 # Memoization: Cache the values of cWays(). cWays(n-1) = 2, cWays(n-2) = 12, cWays(n-4) = 162: Once other cWays(n-4), they can just access the value from hashmap.
 # Use memo for variable name? Them reusing function name is interesting.
 def cWays(n):
@@ -25,7 +25,7 @@ def cWays(n):
             return hashmap[n]
         
     return way(n, hashmap)
-print(cWays(4))
+
 # Robot in a grid
 # Check if square is off limit, check if at max x or y already, move(x+1, y) if doesn't work move(x, y+1), 
 def robotMove(grid: list[list]):
@@ -91,10 +91,16 @@ def hanoi(N, tower1, tower2, tower3):
 # Convert total_string to list?
 
 def permutations_wo_dups(cur_string: str, total_string: list):
-    print(total_string)
     if len(total_string) == 0: # just if len(total_string): works. 
         return cur_string
     # Issue is that total_string.remove(char) affects total_string itself. How to return a list that has all accept removed element that doesn't affect original list?
-    return [permutations_wo_dups(cur_string + char, total_string.remove(char)) for char in total_string]
+    l = []
+    for char in total_string:
+        temp_string = total_string
+        print(temp_string)
+        temp_string.remove(char)
+        l.append(permutations_wo_dups(cur_string + char, temp_string))
+        
+    return l
 
 print(permutations_wo_dups('', list('jose')))

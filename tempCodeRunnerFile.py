@@ -1,2 +1,1 @@
-tail = reverse(head)
-# print(tail)
+    print(chars)
