@@ -18,3 +18,6 @@ def is_palindrome_permutation_pythonic(phrase):
     return sum(val % 2 for val in counter.values()) <= 1
 
 # Many different tricks, some only for lower-level languages like Java/C++
+
+# Look at mario's solutions?
+

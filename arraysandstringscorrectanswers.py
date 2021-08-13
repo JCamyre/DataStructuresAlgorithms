@@ -137,4 +137,35 @@ def one_away(s1: str, s2: str) -> bool:
 # Brute force solutions: hashmap -> looping through keys + str(val). 
 # Formula for determining if regular string shorter or equal to compressed: Need an average of Three characters. So... if len(s) // 3 + 1 < len(hashmap.keys()): return s
 # So do we have to care about upper and lower case? 
+# Should be able to take advantage of the array being sorted and have O(1) space. While looping through, until the cur element we care about changes, have a counter for the number of a specific element, and the total amount of unique characters. 
 
+def string_compression(s):
+    if len(s) < 1:
+        return s
+    
+    # Bad name
+    unique_chars = 1
+    cur_count = 0
+    compressed_string = ''
+    for i in range(len(s)-1):
+        if s[i] != s[i+1]:
+            compressed_string += s[i] + str(cur_count)
+            unique_chars += 1
+            cur_count = 1
+        else:
+            cur_count += 1
+    
+    if s[-2] != s[-1]:
+        compressed_string += s[-1] + 1
+    else:
+        compressed_string += s[-1] + len(cur_count)
+
+    if len(s) < unique_chars * 2 + 1:
+        return s
+    else:
+        return compressed_string
+    # "It 's slow because string concatenation operates in O(n2) time"
+    
+    # You can check if the string has enough unique characters for it to be worth
+    
+    

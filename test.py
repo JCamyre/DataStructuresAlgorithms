@@ -17,16 +17,17 @@
             
 #     return k
 
-# class Solution:
-#     def removeElement(self, xs, target_x):
-#         non_garbage_index = 0
+def removeElement(xs, target_x):
+    non_garbage_index = 0
 
-#         for x_i, x in enumerate(xs):
-#             if x != target_x:
-#                 xs[non_garbage_index], xs[x_i] = x, xs[non_garbage_index]
-#                 non_garbage_index += 1
+    for x_i, x in enumerate(xs):
+        if x != target_x:
+            xs[non_garbage_index], xs[x_i] = x, xs[non_garbage_index]
+            non_garbage_index += 1
 
-#         return non_garbage_index
+    return non_garbage_index, xs
+
+# print(removeElement([1, 2, 2, 3], 2))
     
 def one_away(s1: str, s2: str) -> bool:
     # Brute force O(n), n is length of shorter string since if strings were very different lengths, then the algorithm runs in O(1) (since it will auto return False). If they are about same length (<2), then n1 ~= n2.
@@ -51,22 +52,31 @@ def string_compression(s):
     if len(s) < 1:
         return s
     
-    unique_chars = 0
-    cur_char = s[0]
+    # Bad name
+    unique_chars = 1
     cur_count = 0
     compressed_string = ''
-    for char in s:
-        if cur_char != char:
-            compressed_string += cur_char + str(cur_count)
-            cur_char = char
+    for i in range(len(s)-1):
+        if s[i] != s[i+1]:
+            compressed_string += s[i] + str(cur_count)
             unique_chars += 1
-            cur_count = 0
+            cur_count = 1
         else:
             cur_count += 1
-            
-    if len(s)//3 + 1 < unique_chars:
+    
+    if s[-2] != s[-1]:
+        compressed_string += s[-1] + 1
+    else:
+        compressed_string += s[-1] + len(cur_count)
+
+    if len(s) < unique_chars * 2 + 1:
         return s
     else:
         return compressed_string
+    # "It 's slow because string concatenation operates in O(n2) time"
     
-print(string_compression('aabcccccaaa'))
+    # You can check if the string has enough unique characters for it to be worth
+    
+print(string_compression('aabbcc'))
+
+
