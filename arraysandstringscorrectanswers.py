@@ -168,4 +168,38 @@ def string_compression(s):
     
     # You can check if the string has enough unique characters for it to be worth
     
-    
+# 1.7: Rotate by layer(arr[j][i] -> arr[j+1][i+1]) not sure how to implement properly. Keep doing arr[j+1][i+1] until j < len(arr)//2
+# Assume a square and that can't be less than 1x1
+# As you approach half way point of pixel matrix, you are dealing with decreasing amount of pixels. I.e 5 wide layer -> 4 wide layer -> etc
+# Move each element separately: Bottom right pixel moves to top left, second from bottom right moves to second right from top left
+
+def rotate_matrix(matrix):
+    n = len(matrix) # Since assuming a square
+# left -> top, top -> right, right -> bottom, bottom -> left
+# Do layers until halfway point
+    for j in range(n//2):
+        first = j
+        last = n - j - 1
+        for i in range(first, last):
+            # Have one value as a constant so that you can perform the 90 degree shift.
+            # Temp left
+            print(matrix, i, matrix[i][last])
+            offset = i - first
+            
+            # top
+            top = matrix[first][i]
+            matrix[first][i] = matrix[last-offset][first]
+            
+            # right
+            matrix[last-offset][first] = matrix[last][last - offset]
+            
+            # bottom 
+            matrix[last][last - offset] = matrix[i][last]
+            
+            # left
+            matrix[i][last] = top
+            
+    return matrix
+
+print(rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+

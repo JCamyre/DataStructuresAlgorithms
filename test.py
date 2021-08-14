@@ -65,9 +65,9 @@ def string_compression(s):
             cur_count += 1
     
     if s[-2] != s[-1]:
-        compressed_string += s[-1] + 1
+        compressed_string += s[-1] + str(1)
     else:
-        compressed_string += s[-1] + len(cur_count)
+        compressed_string += s[-1] + str(cur_count)
 
     if len(s) < unique_chars * 2 + 1:
         return s
@@ -77,6 +77,57 @@ def string_compression(s):
     
     # You can check if the string has enough unique characters for it to be worth
     
-print(string_compression('aabbcc'))
+# print(string_compression('aabbcc'))
 
+# arr[j][i] = arr[i][max-j]
+# Top left (j > len(arr[j]) // 2 and i < len(arr[i]) // 2) and bottom right x () value change, bottom left and top right y value change
+# So what about the halfway point?
+arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+if not len(arr) > 1 and not len(arr[0]) > 1:
+    print(arr)
+    
+    
+for j in range(len(arr)):
+    for i in range(len(arr[0])):
+        print(i, j)
+        if (j <= len(arr[j])//2 and i <= len(arr[i]) // 2) or (j > len(arr[j])//2 and i > len(arr[i]) // 2):
+            print(abs(i-len(arr[:-1])))
+            arr[j][abs(i-len(arr[0][:-1]))] = arr[j][i] 
+        else:
+            arr[j-abs(j-len(arr[:-1]))][i] = arr[j][i]
+        
+def display_grid(arr):
+    for j in arr:
+        print('  '.join([str(i) for i in j]), end='\n' * 2)
 
+display_grid(arr)
+
+if len(arr) < 1 or len(arr) != len(arr[0]):
+    print('BAD')
+n = len(arr) # Since assuming a square
+# left -> top, top -> right, right -> bottom, bottom -> left
+# Do layers until halfway point
+for j in range(n//2):
+    first = j
+    last = n - j - 1
+    for i in range(first, last):
+        # Have one value as a constant so that you can perform the 90 degree shift.
+        # Temp left
+        print(arr, i, arr[i][last])
+             
+        # top
+        temp = arr[i][first]
+        arr[i][first], temp = temp, arr[first][i]
+        
+        # right
+        arr[i][last], temp = temp, arr[i][last]
+        
+        # bottom 
+        arr[last][i], temp = temp, arr[last][i]
+        
+        # left
+        arr[first][i], temp = temp, arr[first][i]
+        
+display_grid(arr)
+        
+    

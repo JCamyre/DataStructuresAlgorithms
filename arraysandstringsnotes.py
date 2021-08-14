@@ -19,5 +19,13 @@ def is_palindrome_permutation_pythonic(phrase):
 
 # Many different tricks, some only for lower-level languages like Java/C++
 
-# Look at mario's solutions?
+# Look at mario's solution?
 
+# They split up their solutions/algorithms into more functions
+
+# One other benefit of this approach is that we can initialize StringBuilder to its necessary capacity
+# up-front. Without this, StringBuilder will (behind the scenes) need to double its capacity every time it
+# hits capacity. The capacity could be double what we ultimately need.
+
+# OOP is programming "paradigm", keep everything as Class/objects (where you can have attributes linked to it) "allows you to package together data states and functionality to modify those data states"
+# I need to use data states more, I like that word(s). As a result, code with OOP design is flexible, modular, and abstract.
