@@ -201,5 +201,42 @@ def rotate_matrix(matrix):
             
     return matrix
 
-print(rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+# print(rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+# 1.8: Should be a lot easier than the other one. Its entire row: [0 for _ in arr[M]], [i[N] for i in arr]. Easy O(M*N)
+# Can't do inplace, or can I? Space optimization O(n^2)
+def zero_matrix(matrix):
+    new_matrix = [[True for _ in range(len(matrix[0]))] for _ in range(len(matrix))]
+    for n in range(len(matrix)):
+        for m in range(len(matrix[n])):
+            if matrix[n][m] == 0:
+                # Setting row values in place
+                new_matrix[n] = [0 for _ in matrix[n]]
+                # for i in range(m):
+                #     print(matrix[n])
+                #     matrix[n][i] = 0
+                # Setting col values
+                for i in range(len(matrix)):
+                    new_matrix[i][m] = 0
+            elif not new_matrix[n][m] == 0:
+                new_matrix[n][m] = matrix[n][m]
+                    
+    return new_matrix
+
+    # Make more space efficient by having two arrays for tracking which rows and cols full of zeroes, which is matrix[n][m] == 0 cols/rows. O(M + N) ~= O(2N) = O(N) space
+    # O(1) space: Use first row and column to store if that row/col will be all zeroes. For example: arr[i][j] == 0: therefore arr[i][0] = 0 and arr[0][j] = 0. And then we come back to the first row and column, we know where to put zeroes/nullify row/col. 
+    
+#     This code has a lot of udo this for the rows, then the equivalent action for the column:' In an interview, you
+# could abbreviate this code by adding comments and TODOs that explain that the next chunk of code looks
+# the same as the earlier code, but using rows. This would allow you to focus on the most important parts of
+# the algorithm.
+
+print(zero_matrix([[1, 2, 3], [4, 5, 6], [7, 0, 9]]))
+# To make this somewhat more space efficient, we could use a bit vector instead of a boolean array.
+
+# 1.9. Going to try to split up into more functions. We got the isSubstring function.
+# Brute force: Is the only way to solve is to put the characters in the same order? We can't just look for the same sequence cause that would be using isSubstring.
+# That's brilliant!!!: s2 is basically s1 split up into two parts. s2 = x + y, s1 = y + x. s1 = 'waterbottle', s2 = 'rebottlewat'. Rotation point at the first single
+# Interesting observation from Cracking the code interview: if s2 = xy, and s1 = yx, that means s2 is in y(xy)x. So then just run isSubstring(s1+s1, s2)
+
 

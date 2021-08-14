@@ -21,7 +21,7 @@ def is_palindrome_permutation_pythonic(phrase):
 
 # Look at mario's solution?
 
-# They split up their solutions/algorithms into more functions
+# They split up their solutions/algorithms into a lot more functions than I do. I normally just have one main function. But they split up functions into many smaller functions (which is good for OOP). 
 
 # One other benefit of this approach is that we can initialize StringBuilder to its necessary capacity
 # up-front. Without this, StringBuilder will (behind the scenes) need to double its capacity every time it
@@ -29,3 +29,5 @@ def is_palindrome_permutation_pythonic(phrase):
 
 # OOP is programming "paradigm", keep everything as Class/objects (where you can have attributes linked to it) "allows you to package together data states and functionality to modify those data states"
 # I need to use data states more, I like that word(s). As a result, code with OOP design is flexible, modular, and abstract.
+
+# The 1.8 O(1) space solution so smart, using in-place and the first row and col to store the 0's. It's okay to modify the first row/col because once we come back to them, the entire row/col will be 0's.

@@ -130,4 +130,3 @@ for j in range(n//2):
         
 display_grid(arr)
         
-    
