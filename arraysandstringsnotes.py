@@ -30,4 +30,28 @@ def is_palindrome_permutation_pythonic(phrase):
 # OOP is programming "paradigm", keep everything as Class/objects (where you can have attributes linked to it) "allows you to package together data states and functionality to modify those data states"
 # I need to use data states more, I like that word(s). As a result, code with OOP design is flexible, modular, and abstract.
 
-# The 1.8 O(1) space solution so smart, using in-place and the first row and col to store the 0's. It's okay to modify the first row/col because once we come back to them, the entire row/col will be 0's.
+
+# 1.2, comparing permutations between two strings, array for characters (128 for ASCII), add values to array for s1, remove values to s2, if all values 0, then equal
+
+# 1.4 checking for palindrome general concept: all even values except for a max of one character that has one occurence. 
+# Ex: {'a': 4, 'b': 2, 'c': 1} is a palindrome. {'a': 4, 'b': 2, 'c': 1, 'd': 1} is not a palindrome.
+
+# 1.5 Check if insert/removal and/or replace. Basically iterating through both strings, comparing, if difference, which ever longer do x1+=1 or x2+=1 only. 
+# Instead of x1+=1 and x2+=1. Using while loops and x1+=1/x2+=1 interesting when comparing strings
+
+# 1.6 Split up algo into a lot of functions
+
+# 1.7 Had a good time with this one :))). Think of matrix as layers, and loop layers until half way of matrix height/width. A lot easier to explain with an illustration.
+# The replacement thing pretty interesting. Have to save the element from "top" layer. Then go about replacing the bot value with the right value, left value with bot value, top value with left value, and right value with the saved top value. 
+# For many different algorithms, storing an initial value before you change in place very important.
+
+# Side note, inverting binary tree so easy. Reversing linked lists takes 4 lines in the while loop (optional if statement)
+
+# 1.8 O(1) space solution so smart, using in-place and the first row and col to store the 0's. It's okay to modify the first row/col because once we come back to them, the entire row/col will be 0's.
+# So genius way to change in place part of the data structure to keep track of how to change in place the rest of it. Very interesting. These O(1) space solutions r cracked
+
+# 1.9 Very, very simple solution. Just pure logic/thinking: if s2 is a rotation of s1, then there is a rotation point, where s1 = x + y, and s2 = y + x. 
+# Ex: s1 = 'birthday' = 'birth' + 'day', s2 = 'daybirth' = 'day' + 'birth'
+# Therefore, s2s2 = y(xy)x, s1(xy) MUST be in s2s2 for them to be rotations of each other. Then just put isSubString(s2s2, s1)
+
+
