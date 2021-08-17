@@ -56,9 +56,47 @@ def remove_dups(head):
     if cur.val in arr:
         prev.next = cur.next
     
-    return the_head
+    # return the_head
 
-linked_list = create_linked_list([1, 2, 3, 3, 4])
+    # O(1) space solution, O(n log n) or worse
+    # tracks for this iteration if an unsorted element
+    # have to update head node
+    # This is called bubble sort
+    the_head = head
+    while True:
+        cur = head
+        prev = None
+        unsorted = False
+        while cur.next:
+            if cur.val > cur.next.val:
+                next_node = cur.next
+                if prev:
+                    prev.next = next_node
+                cur.next = cur.next.next
+                next_node.next = cur
+                unsorted = True
+                if not prev:
+                    the_head = cur.next
+                    
+            prev = cur                    
+            cur = cur.next
+
+        # if cur.val > cur.next.val:
+        #     next_node = cur.next
+        #     prev.next = next_node
+        #     cur.next = cur.next.next
+        #     next_node.next = cur        
+        #     if not prev.val:
+        #         the_head = cur.next
+                
+        if not unsorted:
+            break
+        
+    return the_head
+            
+    
+
+linked_list = create_linked_list([4, 2, 3, 3, 4])
 
 for node in iterate_linked_list(remove_dups(linked_list)):
     print(node)
