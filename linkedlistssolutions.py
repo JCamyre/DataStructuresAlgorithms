@@ -253,5 +253,21 @@ def partition(head, x):
     greater.next = None
         
     return lesser 
+# Using multiple linkedlists for a solution is interesting... Using multiple of things I should apply to more problems
 
-# 2.5
+# 2.5 I'll admit, I remember this solution from Leetcode. Such a meta solution, using the principles from first grade arithmetics.
+# Don't assume same length for both lists. Return the linkedlist not reversed right?
+def sum_lists(head1, head2):
+    cur1 = head1
+    cur2 = head2
+    the_sum = 
+    while cur1.next and cur2.next:
+        
+        value = cur1.val + cur2.val # This can't be value, cause we aren't putting 12 for a node
+        if the_sum:
+            node = LinkedListNode(value)
+            node.next = the_sum
+            the_sum = node
+        if value > 
+        carry = value % 10
+# These mfs using recursion bruh. I iteration only :sunglasses:. Need more recursion practice.
