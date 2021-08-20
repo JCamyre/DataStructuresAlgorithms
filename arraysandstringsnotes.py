@@ -54,4 +54,12 @@ def is_palindrome_permutation_pythonic(phrase):
 # Ex: s1 = 'birthday' = 'birth' + 'day', s2 = 'daybirth' = 'day' + 'birth'
 # Therefore, s2s2 = y(xy)x, s1(xy) MUST be in s2s2 for them to be rotations of each other. Then just put isSubString(s2s2, s1)
 
-
+# General tips
+# Using two pointers, or more
+# Sliding window
+# Principles specific to a problem: https://leetcode.com/problems/container-with-most-water/. Min/maxing height vs width. Taking the smallest trade off possible (one width for the smallest of the two line)
+# Use max(area, max_area) instead of if area > max_area: 
+# Instead of doing a triple nested loop, do one for loop, then for the other two pointers, 
+# O(n^2) instead of O(n^3). 
+# Sometimes is using a sorting algorithm worth? Makes a lot more efficient: "set values and do j+=1 or k-=1 depending on new_value compared to target value"
+# Without sorting array can't do 1 for loop + while loop. num.sort(), num = sorted(num)

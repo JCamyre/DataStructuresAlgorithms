@@ -9,3 +9,6 @@
 # Using two runners to get to middle of linkedlist.
 # Using stack data type, specifically for reversing linkedlist
 
+# Tips/techniques/patterns
+
+# 
