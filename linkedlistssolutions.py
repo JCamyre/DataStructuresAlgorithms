@@ -271,3 +271,43 @@ def sum_lists(head1, head2):
         if value > 
         carry = value % 10
 # These mfs using recursion bruh. I iteration only :sunglasses:. Need more recursion practice.
+
+# 2.6 Using O(n) space: Use hashmap and iterate through linkedlist, adding to hashmap. If anymore than one thing have only one character, not palindrome.
+# Using recursion: check if .next, is_palindrome(p.next, values), have a hashmap passed through
+# Using no space, save head, and reverse the list. Then compare the two versions. Anything better than O(1) space and O(n^2) time?
+# A small optimization for the O(1) space: Since palindrome is same forward and back, only have to check first half of regular linkedlist and half of reversed linkedlist
+
+# Another solution using space, but only half as much. Use a stack to reverse the first half of the linkedlist (we have to be careful when dealing with odd length linkedlist)
+# Use two runners (one twice as long) to get to the middle of the linkedlist. We then compare the nodes from the stack, to the second half of the linkedlist. If all equal, than palindrome.
+# Need to get better at working with odd length or any edge case: if (fast != nUll) {slow = slow. next;}
+
+# Recursion approach always yikes: 
+# I like how they visualize the call stack
+# Use length-2 to find the length of the linkedlist. 
+# Compare node i to node n-i (since palindromes are same forward and back)
+# Very interesting use of call stacks and "rewinding them". Basically "on the way down" we are making a call stack from the first node to one node before the middle node, 
+# And "on the way back up" we are comparing the node after the middle to the node before the middle, then we compare two nodes after middle to two nodes before. We are returning the second half of nodes "on the way back up".
+# It is very smart, I hope it makes sense. call 1 -> call 2 -> call 3 -> call 4 (hit middle) > call 3 compared to first node in second half -> call 2 compared to second node in second half -> call 1 compared to last node in second half
+# Have to do the length - 2 to find halfway point. Very cool
+
+# 2.7 intersection:
+# Very easy O(n^2) time and O(1) space for each node in List A to be compared to every node in List B
+# Finding middle node doesn't matter, reversing list doesn't necessarily help
+# Only way to make more efficient is to not have to compare each node O(n^2)
+# Using space: Iterate through List A and put in all nodes in an array. Then compare to List B, O(n) time and space.
+# Only have to find one intersecting node
+# If two lists are intersecting, every node after the first intersecting node are the same. This means they will always have the same tail node.
+# This why working through examples while rereading the prompt is so important.
+# Count the length of each list and get the tail nodes. If the tail nodes !=, then return because there is no intersection.
+# If there is a difference in the lists, the longer list will have useless nodes, so we will skip them by having a pointer that is abs(length1-length2) ahead of pointer2
+# Once they are the same object, return.
+# There's always some optimization trick, just got to work through the problem. Finding the length and tail node seems a little inefficient, but works clean.
+
+# 2.8 Brute force use hashmap to store nodes. Check if node in it.
+# Check if current node in hashmap
+# The two runner thing is broken: if in a circular list, they will always eventually meet. They can not skip each other: if slow is i and fast is i + 1, then the previous step was i - 1 and (i + 1) - 2 = i - 1. BOOM
+# So if the list is circular, with the slow and fast runner, they will eventually collide. 
+# So how long until they collide? If the size of the non-looped part is size K, 2(K) - 2
+# Some math behind it, sorta understand it. Because of the difference of nodes traveled, when they collide, the next time they meet when slowpointer is reset, that is when loop should be.
+# Slow + fast pointer, when they collide, keep fast pointer where it is and reset slow pointer. Then move them both at a rate of one step. When they collide, this is where loop is.
+
